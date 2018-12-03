@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import rest.db.pojo.Book;
+import rest.db.pojo.Wish;
 import rest.service.BookService;
 
 import java.util.List;
@@ -27,5 +28,11 @@ public class BookController {
     @RequestMapping(value = "/book", method = RequestMethod.GET)
     public List<Book> booksList(Model model) {
         return bookService.getBooksList();
+    }
+
+    // этот метод принимает GET запрос и возвращает список всех книг
+    @RequestMapping(value = "/wish", method = RequestMethod.GET)
+    public List<Wish> wishList(Model model) {
+        return bookService.getWishList();
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rest.db.dao.BookDao;
 import rest.db.pojo.Book;
+import rest.db.pojo.Wish;
 
 import java.util.List;
 
@@ -21,8 +22,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getBooksList() {
-
-        System.out.println(bookDao.getBooksList());
         return bookDao.getBooksList();
+    }
+
+    @Override
+    public List<Wish> getWishList() {
+        return bookDao.getWishList();
     }
 }

@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import rest.db.mappers.BookMapper;
+import rest.db.mappers.WishMapper;
 import rest.db.pojo.Book;
-
+import rest.db.pojo.Wish;
 
 import java.util.List;
 
@@ -28,6 +29,13 @@ public class BookDaoImpl implements BookDao {
     public List<Book> getBooksList() {
         return jdbcTemplate.query("SELECT books.id, books.name, authors.id_author, authors.fio FROM books LEFT JOIN authors on books.author_id = authors.id_author",
                 new BookMapper());
+
+    }
+
+    @Override
+    public List<Wish> getWishList() {
+        return jdbcTemplate.query("SELECT wishes.wishes_id, books.id, books.name, authors.id_author, authors.fio FROM wishes JOIN books on wishes.book_id = books.id JOIN authors on books.author_id = authors.id_author",
+                new WishMapper());
 
     }
 }
