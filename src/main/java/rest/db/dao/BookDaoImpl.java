@@ -1,10 +1,12 @@
 package rest.db.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import rest.db.mappers.BookMapper;
 import rest.db.pojo.Book;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -13,19 +15,19 @@ import java.util.List;
  */
 @Component
 public class BookDaoImpl implements BookDao {
-    private List<Book> books = new ArrayList<>();
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public BookDaoImpl() {
-        books.add(new Book(1, "one"));
-        books.add(new Book(2, "two"));
-        books.add(new Book(3, "three"));
-        books.add(new Book(4, "for"));
+    public BookDaoImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
-    //Метод выводит список книг
+
+    //этот метод делает запрос на выборку всех книг и возвращает Список Книг
     @Override
     public List<Book> getBooksList() {
-        return books;
+        return jdbcTemplate.query("SELECT books.id, books.name, authors.id_author, authors.fio FROM books LEFT JOIN authors on books.author_id = authors.id_author",
+                new BookMapper());
+
     }
 }

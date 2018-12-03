@@ -8,11 +8,20 @@ public class Book {
 
     private int id;
     private String name;
+    private Author author;
 
-
-    public Book(int id, String name) {
+    public Book(int id, String name, Author author) {
         this.id = id;
         this.name = name;
+        this.author = author;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getName() {
@@ -36,6 +45,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", author=" + author +
                 '}';
     }
 }
