@@ -10,6 +10,11 @@ import java.sql.SQLException;
 public class BookMapper implements RowMapper<Book> {
     @Override
     public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new Book(rs.getInt("id"), rs.getString("name"), new Author(rs.getInt("id_author"),rs.getString("fio")));
+        return new Book(
+                rs.getInt("id"),
+                rs.getString("name"),
+                new Author(
+                        rs.getInt("id_author"),
+                        rs.getString("fio")));
     }
 }

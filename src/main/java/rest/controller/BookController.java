@@ -1,17 +1,20 @@
 package rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import rest.db.pojo.Book;
 import rest.service.BookService;
+
+import java.util.List;
 
 
 /**
  * Главвный контроллер приложения, обрабатывает REST запросы
  */
-@Controller
+@RestController
 public class BookController {
     private BookService bookService;
 
@@ -20,11 +23,9 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    // этот метод принимает GET запрос и выводит список всех книг
+    // этот метод принимает GET запрос и возвращает список всех книг
     @RequestMapping(value = "/book", method = RequestMethod.GET)
-    public String booksList(Model model) {
-        model.addAttribute("books", bookService.getBooksList());
-
-        return "book";
+    public List<Book> booksList(Model model) {
+        return bookService.getBooksList();
     }
 }
