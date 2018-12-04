@@ -7,7 +7,9 @@ import rest.db.pojo.Wish;
 import java.util.List;
 
 public interface BookService {
-    List<Book> getBooksList();
 
+    List<Book> getBooksList();
     List<Wish> getWishList();
+
+    String addBook(String nameBook, int author);
 }

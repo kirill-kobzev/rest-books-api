@@ -6,8 +6,10 @@ import rest.db.pojo.Wish;
 import java.util.List;
 
 public interface BookDao {
-    List<Book> getBooksList();
 
+    List<Book> getBooksList();
     List<Wish> getWishList();
+
+    String addBook(String nameBook, int author);
 
 }

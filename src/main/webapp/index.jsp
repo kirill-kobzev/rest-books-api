@@ -1,3 +1,4 @@
+<%@ taglib prefix="v-on" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Кирилл
@@ -55,7 +56,7 @@
 
     </div>
     <div class="butt">
-        <button class="post">POST</button>
+        <button class="post" v-on:click="addBook()">POST</button>
         <button class="put">PUT</button>
         <button class="delete">DELETE</button>
     </div>
@@ -85,12 +86,21 @@
                     this.wishes = response.data;
             })
             },
+            addBook: function () {
+                var params = new URLSearchParams();
+                params.append('author', '2');
+                params.append('nameBook', 'Вишневый сад');
+                axios.post('/book', params, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+            },
         },
         created: function () {
             this.loadListBook();
             this.loadListWish();
         },
-
     });
 </script>
 </html>

@@ -32,10 +32,18 @@ public class BookDaoImpl implements BookDao {
 
     }
 
+    //этот метод делает запрос на выборку всех книг и возвращает Список желаний
     @Override
     public List<Wish> getWishList() {
         return jdbcTemplate.query("SELECT wishes.wishes_id, books.id, books.name, authors.id_author, authors.fio FROM wishes JOIN books on wishes.book_id = books.id JOIN authors on books.author_id = authors.id_author",
                 new WishMapper());
-
     }
+
+    //этот метод добавляет запись в таблицу books
+    @Override
+    public String addBook(String nameBook, int author) {
+        jdbcTemplate.update("insert into books (name, author_id) VALUES(?, ?)", nameBook, author);
+        return "Ok";
+    }
+
 }

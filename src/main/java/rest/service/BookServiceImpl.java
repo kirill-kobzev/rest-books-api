@@ -29,4 +29,10 @@ public class BookServiceImpl implements BookService {
     public List<Wish> getWishList() {
         return bookDao.getWishList();
     }
+
+    @Override
+    public String addBook(String nameBook, int author) {
+        return bookDao.addBook(nameBook, author);
+    }
+
 }
