@@ -74,7 +74,7 @@
                 axios({
                     method: 'get',
                     url: '/book'
-                }).then(response = > {
+                }).then(response => {
                     this.books = response.data;
             })
             },
@@ -82,7 +82,7 @@
                 axios({
                     method: 'get',
                     url: '/wish'
-                }).then(response = > {
+                }).then(response => {
                     this.wishes = response.data;
             })
                 ;
