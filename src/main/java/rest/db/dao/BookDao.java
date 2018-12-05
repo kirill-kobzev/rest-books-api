@@ -12,4 +12,8 @@ public interface BookDao {
 
     String addBook(String nameBook, int author);
 
+    String updateBook(int id, String nameBook);
+
+    String deleteBook(int id);
+
 }

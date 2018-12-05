@@ -57,8 +57,8 @@
     </div>
     <div class="butt">
         <button class="post" v-on:click="addBook()">POST</button>
-        <button class="put">PUT</button>
-        <button class="delete">DELETE</button>
+        <button class="put" v-on:click="updateBook()">PUT</button>
+        <button class="delete" v-on:click="deleteBook()">DELETE</button>
     </div>
 </div>
 </body>
@@ -85,6 +85,7 @@
                 }).then(response = > {
                     this.wishes = response.data;
             })
+                ;
             },
             addBook: function () {
                 var params = new URLSearchParams();
@@ -94,7 +95,29 @@
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
-                })
+                });
+                this.loadListBook();
+            },
+            updateBook: function () {
+                var params = new URLSearchParams();
+                // params.append('nameBook', 'Избранное');
+                // params.append('id', 1);
+                axios.put('/book/' + this.books[0].id + '?nameBook=Избранное', params, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+                this.loadListBook();
+            },
+            deleteBook: function () {
+                var params = new URLSearchParams();
+                // params.append('id', this.books[0].id);
+                axios.delete('/book/' + this.books[0].id, params, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+                this.loadListBook();
             },
         },
         created: function () {

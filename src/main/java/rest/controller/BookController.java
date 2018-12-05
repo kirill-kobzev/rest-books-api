@@ -2,10 +2,7 @@ package rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rest.db.pojo.Book;
 import rest.db.pojo.Wish;
 import rest.service.BookService;
@@ -37,7 +34,7 @@ public class BookController {
         return bookService.getWishList();
     }
 
-    // этот метод принимает POST запрос c 2 параметрами,
+    // этот метод принимает POST запрос c 2 параметрами
     @RequestMapping(value = "/book", method = RequestMethod.POST)
     public String addBook(
             @RequestParam(value = "nameBook") String nameBook,
@@ -45,4 +42,22 @@ public class BookController {
     ) {
         return bookService.addBook(nameBook, author);
     }
+
+    // этот метод принимает PUT запрос c 3 параметрами
+    @RequestMapping(value = "/book/{id}", method = RequestMethod.PUT)
+    public String updateBook(
+            @RequestParam("nameBook") String nameBook,
+            @PathVariable("id") int id
+    ) {
+        return bookService.updateBook(id, nameBook);
+    }
+
+    // этот метод принимает DELETE запрос c 1 параметром
+    @RequestMapping(value = "/book/{id}", method = RequestMethod.DELETE)
+    public String deleteBook(
+            @PathVariable(value = "id") int id
+    ) {
+        return bookService.deleteBook(id);
+    }
+
 }

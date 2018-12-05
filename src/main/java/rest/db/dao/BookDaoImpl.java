@@ -42,7 +42,21 @@ public class BookDaoImpl implements BookDao {
     //этот метод добавляет запись в таблицу books
     @Override
     public String addBook(String nameBook, int author) {
-        jdbcTemplate.update("insert into books (name, author_id) VALUES(?, ?)", nameBook, author);
+        jdbcTemplate.update("INSERT INTO books (name, author_id) VALUES(?, ?)", nameBook, author);
+        return "Ok";
+    }
+
+    //этот метод обновляет запись в таблице books
+    @Override
+    public String updateBook(int id, String nameBook) {
+        jdbcTemplate.update("UPDATE books SET name = ? WHERE  id = ?", nameBook, id);
+        return "Ok";
+    }
+
+    //этот метод удаляет запись из таблицы books
+    @Override
+    public String deleteBook(int id) {
+        jdbcTemplate.update("DELETE FROM books WHERE  id = ?", id);
         return "Ok";
     }
 
