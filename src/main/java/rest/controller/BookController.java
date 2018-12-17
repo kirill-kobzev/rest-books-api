@@ -3,8 +3,10 @@ package rest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import rest.db.dao.entities.Article;
 import rest.db.pojo.Book;
 import rest.db.pojo.Wish;
+import rest.service.ArticleService;
 import rest.service.BookService;
 
 import java.util.List;
@@ -16,6 +18,12 @@ import java.util.List;
 @RestController
 public class BookController {
     private BookService bookService;
+    private ArticleService articleService;
+
+    @Autowired
+    public void setArticleService(ArticleService articleService) {
+        this.articleService = articleService;
+    }
 
     @Autowired
     public void setBookService(BookService bookService) {
@@ -26,6 +34,13 @@ public class BookController {
     @RequestMapping(value = "/book", method = RequestMethod.GET)
     public List<Book> booksList(Model model) {
         return bookService.getBooksList();
+    }
+
+    // этот метод принимает GET запрос и возвращает список статей
+    // Используется HIBERNATE
+    @RequestMapping(value = "/articleList", method = RequestMethod.GET)
+    public List<Article> showArticleList(Model model) {
+        return  articleService.getArticleList();
     }
 
     // этот метод принимает GET запрос и возвращает список желаний
